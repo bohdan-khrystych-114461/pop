@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://YOUR_RENDER_API_URL.onrender.com'  // TODO: Replace after deploying API to Render
+  apiUrl: 'https://pop-61uj.onrender.com'
 };
