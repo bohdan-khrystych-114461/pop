@@ -25,7 +25,8 @@ builder.Services.AddCors(options =>
             var uri = new Uri(origin);
             return uri.Host == "localhost" 
                 || uri.Host == "127.0.0.1"
-                || uri.Host.EndsWith(".github.io");
+                || uri.Host.EndsWith(".github.io")
+                || uri.Host.EndsWith(".onrender.com");
         })
         .AllowAnyHeader()
         .AllowAnyMethod()
