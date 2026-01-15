@@ -1,0 +1,237 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.header button {
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.actions {
+  margin-bottom: 2rem;
+}
+
+.actions button {
+  height: 48px;
+  font-size: 1rem;
+  box-shadow: var(--shadow-md);
+}
+
+.form-card {
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+  animation: slideIn 0.4s ease-out;
+  overflow: hidden;
+}
+
+.form-card mat-card-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+  padding: 1.5rem;
+  margin: -16px -16px 1.5rem -16px;
+  border-radius: 0;
+}
+
+.form-card mat-card-title {
+  color: white !important;
+  font-size: 1.25rem !important;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+.image-section {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: var(--background);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--border-color);
+}
+
+.image-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.hint {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0.5rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hint::before {
+  content: '💡';
+  font-size: 1.1rem;
+}
+
+.file-input {
+  display: block;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.file-input:hover {
+  border-color: rgba(37, 99, 235, 0.4);
+  background: var(--background);
+}
+
+.image-preview {
+  position: relative;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.image-preview img {
+  max-width: 250px;
+  max-height: 250px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.image-preview img:hover {
+  transform: scale(1.05);
+  border-color: rgba(37, 99, 235, 0.4);
+  box-shadow: var(--shadow-lg);
+}
+
+.remove-image {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: var(--danger-color);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.remove-image:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  color: var(--text-secondary);
+}
+
+.loading .spinner {
+  margin: 0 auto;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.item-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border-color);
+  border-top: 4px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.item-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(37, 99, 235, 0.3);
+  border-top-color: var(--primary-color);
+}
+
+.item-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.item-card:hover .item-image {
+  transform: scale(1.05);
+}
+
+.item-content {
+  padding: 1.25rem;
+  background: var(--background);
+}
+
+.item-content h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+mat-card-actions {
+  padding: 1rem !important;
+  background: var(--background);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 5rem 2rem;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--border-color);
+}
+
+.empty-state mat-icon {
+  font-size: 80px;
+  width: 80px;
+  height: 80px;
+  color: var(--accent-color);
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.empty-state h2 {
+  margin: 1.5rem 0 0.75rem;
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}

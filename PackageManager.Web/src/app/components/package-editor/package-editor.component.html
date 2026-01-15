@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="header">
+    <button mat-icon-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{ isNew ? 'New Package' : 'Edit Package' }}</h1>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <p>Loading...</p>
+  </div>
+
+  <div class="editor-layout" *ngIf="!loading && package">
+    <div class="left-panel">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ package.name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content-spacing">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Box Size</mat-label>
+            <mat-select [(ngModel)]="boxSize" (selectionChange)="updateBoxSize()">
+              <mat-option [value]="''">None</mat-option>
+              <mat-option *ngFor="let size of boxSizes" [value]="size">{{ size }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Total Weight (lb)</mat-label>
+            <input matInput type="number" [(ngModel)]="totalWeight" (blur)="updateWeight()" step="0.1">
+          </mat-form-field>
+
+          <h3>Items in Package</h3>
+          <div class="package-items">
+            <div *ngIf="package.items.length === 0" class="empty-message">
+              No items added yet. Click items from the right panel to add them.
+            </div>
+            <div *ngFor="let item of package.items" class="package-item">
+              <img *ngIf="item.itemImageUrl" [src]="item.itemImageUrl" [alt]="item.itemName" (click)="showImage(item.itemImageUrl!)" class="item-image">
+              <div class="item-info">
+                <strong>{{ item.itemName }}</strong>
+              </div>
+              <div class="quantity-controls">
+                <button mat-icon-button (click)="decreaseQuantity(item)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <span class="quantity">{{ item.quantity }}</span>
+                <button mat-icon-button (click)="increaseQuantity(item)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="savePackage()">
+            <mat-icon>save</mat-icon>
+            Save
+          </button>
+          <button mat-raised-button (click)="copyReport()">
+            <mat-icon>content_copy</mat-icon>
+            Copy Report
+          </button>
+          <button mat-raised-button color="accent" (click)="completePackage()">
+            <mat-icon>check_circle</mat-icon>
+            {{ package.isCompleted ? 'Mark as Incomplete' : 'Mark as Complete' }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div class="right-panel">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Available Items</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Search items</mat-label>
+            <input matInput [(ngModel)]="searchQuery" (ngModelChange)="filterItems()" placeholder="Type to search...">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+          <div class="items-grid">
+            <div *ngFor="let item of availableItems" class="item-card" (click)="addItem(item)">
+              <img *ngIf="item.imageUrl" [src]="item.imageUrl" [alt]="item.name" class="item-image">
+              <div class="item-name">{{ item.name }}</div>
+            </div>
+            <div *ngIf="availableItems.length === 0" class="empty-message">
+              No items available. Go to Settings to add items.
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

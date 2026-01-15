@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: packagemanager-db
+    environment:
+      POSTGRES_DB: packagemanager
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./PackageManager.Api
+      dockerfile: Dockerfile
+    container_name: packagemanager-api
+    environment:
+      - DATABASE_URL=Host=db;Database=packagemanager;Username=postgres;Password=postgres
+      - ASPNETCORE_URLS=http://+:5002
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5002:5002"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5002/api/items"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  web:
+    build:
+      context: ./PackageManager.Web
+      dockerfile: Dockerfile
+    container_name: packagemanager-web
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  postgres_data:

@@ -1,0 +1,56 @@
+### Package Manager API Tests
+### Use with REST Client extension in VS Code or any HTTP client
+
+@baseUrl = http://localhost:5000/api
+
+### Get all items
+GET {{baseUrl}}/items
+
+### Create a new item
+POST {{baseUrl}}/items
+Content-Type: application/json
+
+{
+  "name": "Test Item 1",
+  "imageUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+}
+
+### Get all packages
+GET {{baseUrl}}/packages
+
+### Create a new package
+POST {{baseUrl}}/packages
+Content-Type: application/json
+
+{
+  "name": "Test Package",
+  "boxSize": "26x16x15"
+}
+
+### Add item to package (replace {packageId} and {itemId})
+POST {{baseUrl}}/packages/1/items
+Content-Type: application/json
+
+{
+  "itemId": 1
+}
+
+### Update package weight (replace {packageId})
+PUT {{baseUrl}}/packages/1/weight
+Content-Type: application/json
+
+{
+  "weight": 5.5
+}
+
+### Complete package (replace {packageId})
+PUT {{baseUrl}}/packages/1/complete
+
+### Get package by ID (replace {packageId})
+GET {{baseUrl}}/packages/1
+
+### Delete package (replace {packageId})
+DELETE {{baseUrl}}/packages/1
+
+### Delete item (replace {itemId})
+DELETE {{baseUrl}}/items/1
