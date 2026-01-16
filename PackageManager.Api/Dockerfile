@@ -4,9 +4,9 @@ EXPOSE 5002
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
-COPY ["PackageManager.Api.csproj", "./"]
+COPY ["PackageManager.Api/PackageManager.Api.csproj", "./"]
 RUN dotnet restore "PackageManager.Api.csproj"
-COPY . .
+COPY PackageManager.Api/ .
 RUN dotnet build "PackageManager.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
